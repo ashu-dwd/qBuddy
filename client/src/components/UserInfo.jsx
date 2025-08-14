@@ -15,8 +15,8 @@ const UserInfo = () => {
       <div className="flex-grow flex items-center justify-center p-4">
         <div className="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-light text-black mb-2">
-              User Information
+            <h1 className="text-4xl font-semibold text-black mb-2">
+              Welcome to Q Buddy
             </h1>
             <div className="w-12 h-px bg-black mx-auto"></div>
           </div>

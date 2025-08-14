@@ -1,4 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { cardData } from "../utils/cardData";
 import { axiosInstance } from "../utils/axiosInstance";
 
@@ -243,7 +246,7 @@ const ChatInterface = () => {
                 message.sender === "user" ? "justify-end" : "justify-start"
               }`}
             >
-              <div className="max-w-xs sm:max-w-md lg:max-w-lg xl:max-w-xl">
+              <div className={`max-w-xs sm:max-w-md lg:max-w-lg xl:max-w-xl`}>
                 <div
                   className={`px-4 py-3 rounded-2xl ${
                     message.sender === "user"
@@ -255,7 +258,53 @@ const ChatInterface = () => {
                       : "bg-white text-gray-800 rounded-bl-md shadow-sm border border-gray-200"
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{message.text}</p>
+                  {message.sender === "bot" ? (
+                    <ReactMarkdown
+                      components={{
+                        code({ inline, className, children, ...props }) {
+                          const match = /language-(\w+)/.exec(className || "");
+                          return !inline && match ? (
+                            <div className="relative group">
+                              {/* Copy Button */}
+                              <button
+                                onClick={() => {
+                                  navigator.clipboard.writeText(
+                                    String(children).trim()
+                                  );
+                                }}
+                                className="absolute top-2 right-2 bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition"
+                              >
+                                Copy
+                              </button>
+
+                              {/* Syntax Highlighter */}
+                              <SyntaxHighlighter
+                                style={atomDark}
+                                language={match[1]}
+                                PreTag="div"
+                                {...props}
+                              >
+                                {String(children).replace(/\n$/, "")}
+                              </SyntaxHighlighter>
+                            </div>
+                          ) : (
+                            <code
+                              className={`bg-gray-200 px-1 rounded text-sm ${
+                                className || ""
+                              }`}
+                              {...props}
+                            >
+                              {String(children)}
+                            </code>
+                          );
+                        },
+                      }}
+                    >
+                      {message.text}
+                    </ReactMarkdown>
+                  ) : (
+                    <p className="text-sm leading-relaxed">{message.text}</p>
+                  )}
                 </div>
                 <p
                   className={`text-xs mt-1 ${
