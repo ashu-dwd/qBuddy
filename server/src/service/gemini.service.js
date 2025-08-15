@@ -44,6 +44,11 @@ export const handleFollowUp = async (userMessage, ROLE) => {
   const response = await openai.chat.completions.create({
     model: GEMINI_MODEL_NAME,
     messages: conversationHistories[ROLE],
+    max_completion_tokens: 1024,
+    temperature: 1.9,
+    top_p: 0.8,
+    frequency_penalty: 0.5,
+    presence_penalty: 0.3,
   });
 
   const aiReply = response.choices[0]?.message?.content || "";
