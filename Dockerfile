@@ -1,23 +1,23 @@
 # Use a Node.js LTS version as the base image
 FROM node:18-alpine
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
 # Install pnpm
 RUN npm install -g pnpm
 
-# Copy package.json and pnpm-lock.yaml from the server directory
+# Copy only server package files first (for caching)
 COPY server/package.json server/pnpm-lock.yaml ./
 
-# Install dependencies
+# Install only production dependencies
 RUN pnpm install --prod
 
-# Copy the rest of the server's source code
-COPY server/ .
+# Copy the rest of the server source code
+COPY server/ ./
 
-# Expose the port the app runs on
+# Expose port
 EXPOSE 8080
 
-# Command to start the server
+# Start command
 CMD ["pnpm", "start"]
