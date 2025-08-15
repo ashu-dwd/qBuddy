@@ -271,6 +271,7 @@ const ChatInterface = () => {
                                   navigator.clipboard.writeText(
                                     String(children).trim()
                                   );
+                                  this.button.text("Copied");
                                 }}
                                 className="absolute top-2 right-2 bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition"
                               >

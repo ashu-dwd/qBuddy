@@ -1,7 +1,7 @@
 import { handleFollowUp } from "../service/gemini.service.js";
 
 export const chatController = async (req, res) => {
-  //console.log(req.body);
+  console.log(req.body);
 
   const { userMessage, ROLE } = req.body;
 

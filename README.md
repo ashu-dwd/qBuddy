@@ -1,6 +1,6 @@
 # qBuddy
 
-[![Ask DeepWiki](https://q-buddy.vercel.app/logo.png)](https://deepwiki.com/ashu-dwd/qBuddy)
+![Ask DeepWiki](https://q-buddy.vercel.app/logo.png)
 
 qBuddy is an interactive chat application that allows users to engage in conversations with AI personas of renowned tech educators, Hitesh Chaudhary and Piyush Garg. The application leverages Google's Gemini API to generate context-aware and personality-driven responses, creating an immersive and educational chat experience.
 

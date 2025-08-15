@@ -1,15 +1,14 @@
 import OpenAI from "openai";
-import { GEMINI_API_KEY, GEMINI_MODEL_NAME } from "../../config/config.js";
+import { GROQ_API_KEY, GROQ_MODEL_NAME } from "../../config/config.js";
 import {
   SYSTEM_PROMPT_HITESH_SIR,
   SYSTEM_PROMPT_PIYUSH_SIR,
 } from "../utils/SYSTEM_PROMPT.js";
 import ApiError from "../utils/apiError.js";
 
-// console.log(GEMINI_API_KEY);
 const openai = new OpenAI({
-  apiKey: GEMINI_API_KEY,
-  baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+  apiKey: GROQ_API_KEY,
+  baseURL: "https://api.groq.com/openai/v1",
 });
 
 // In-memory store for each ROLE
@@ -43,9 +42,13 @@ export const handleFollowUp = async (userMessage, ROLE) => {
 
   // Call API with full history
   const response = await openai.chat.completions.create({
-    model: GEMINI_MODEL_NAME,
+    model: GROQ_MODEL_NAME,
     messages: conversationHistories[ROLE],
+    max_completion_tokens: 1024,
     temperature: 1.9,
+    top_p: 0.8,
+    frequency_penalty: 0.5,
+    presence_penalty: 0.3,
   });
 
   const aiReply = response.choices[0]?.message?.content || "";
@@ -56,9 +59,3 @@ export const handleFollowUp = async (userMessage, ROLE) => {
   // Return both AI reply and updated history
   return aiReply;
 };
-
-// Example:
-// (async () => {
-//   const res = await handleFollowUp("Hello sir!", 1);
-//   console.log(res.reply);
-// })();
