@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BACKEND_API_URL } from "../config/config";
 export const axiosInstance = axios.create({
-  baseURL: "/api/v1",
+  baseURL: BACKEND_API_URL,
 });

@@ -12,10 +12,10 @@ const App = () => {
   removeLocalData("userData");
   if (userInfo.length === 0) {
     isUserLoggedIn = false;
-    console.log("user not logged in");
+    //console.log("user not logged in");
   } else {
     isUserLoggedIn = true;
-    console.log("user logged in");
+    //console.log("user logged in");
   }
   return <div>{isUserLoggedIn ? <CardsPage /> : <UserInfo />}</div>;
 };

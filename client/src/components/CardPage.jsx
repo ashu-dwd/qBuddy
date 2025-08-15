@@ -10,7 +10,7 @@ const CardsPage = () => {
   const { userInfo } = useUserContext();
 
   const handleViewProfile = (id) => {
-    console.log(`Viewing profile for ${id}`);
+    //console.log(`Viewing profile for ${id}`);
     setLocalData("userData", { userInfo, selectedRole: id });
     setShowChat(true);
   };

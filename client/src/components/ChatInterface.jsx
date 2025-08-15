@@ -120,7 +120,7 @@ const ChatInterface = () => {
         };
 
         setMessages((prev) => [...prev, newMessage]);
-        console.log(messages);
+        //console.log(messages);
 
         setIsTyping(false);
       })
