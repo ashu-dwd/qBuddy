@@ -14,3 +14,6 @@ app.use(limiter);
 
 //api routes
 app.use("/api/v1/chat", chatRoute);
+app.get("/api/v1/health", (req, res) => {
+  res.send({ status: "ok", message: "API is running fine.😊" });
+});
